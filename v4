@@ -1,7 +1,12 @@
+#Overall its really good at finding the combinations, it just sucks at endgame now, develop new structure for endgame
+    #with multiple features for different outcomes
+    #just code stuff manually, not that many possibilities
 
-#fix code for none input, but besides that, more testing
 
-#add four and five and a lot more to interpret rpossible
+
+#add a four w thing it does (can't just continue its current thing)
+
+
 
 import random
 from random import randint
@@ -37,11 +42,19 @@ one = []
 
 two = []
 
-threePlus = []
+three = []
+
+four = []
+
+five = []
+
+sixPlus = []
 
 colorspossible = []
 
 correct = []
+
+scores = []
 
 guessnum = 1
 
@@ -86,39 +99,73 @@ def guessfunc():
         #rPlace is the system that makes sure each guess gets put in the right slot
         rPlace = []
 
-        trinary = random.randint(2,3)
+        trinary = random.randint(2, 3)
 
         #creates rPlace
-        if len(rpossible) > 2:
+        if len(rpossible) >= 2:
 
             #makes temp lists
             tempOne = []
             tempTwo = []
-            tempThreePlus = []
+            tempthree = []
+            tempfour = []
+            tempfive = []
+            tempsixPlus = []
             for i in one:
                 tempOne.append(i)
             for i in two:
                 tempTwo.append(i)
-            for i in threePlus:
-                tempThreePlus.append(i)
+            for i in three:
+                tempthree.append(i)
+            for i in four:
+                tempfour.append(i)
+            for i in five:
+                tempfive.append(i)
+            for i in sixPlus:
+                tempsixPlus.append(i)
 
 
 
             #Trinary is how many rpossibles are put into the next guess
-            chance = [1, 2, 2, 3, 3, 3, 3, 3, 3]
-            while trinary != 0:
-                #handles guessing based on frequency in rpossible using lists one, two, and threePlus
+            
+            if guessnum != 1 and len(scores) > 1:
+                print(scores[guessnum-2])
+                if scores[guessnum-2] < scores[guessnum-3]:
+                    print("Previous of the previous guess")
+                    print(attempted[guessnum-3])
+                    for i in attempted[guessnum-3]:
+                        for j in range(0,2):
+                            if j not in out and j in rpossible:
+                                print(j)
+                                rpossible.append(i)
 
-                if len(two) == 0 and len(threePlus) == 0:
+                
+            chance = [1, 1, 2, 2, 2, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6,]
+            while trinary != 0:
+                #handles guessing based on frequency in rpossible using lists one, two, and three
+
+                if len(two) == 0 and len(three) == 0 and len(four) == 0 and len(five) == 0 and len(sixPlus) == 0:
                     draw = 1
                 else:
-                    if len(threePlus) == 0:
+                    if len(two) == 0:
+                        for k in chance:
+                            if k == 2:
+                                chance.remove(k)
+                    elif len(three) == 0:
                         for j in chance:
                             if j == 3:
                                 chance.remove(j)
-                    elif len(two) == 0:
+                    elif len(four) == 0:
                         for k in chance:
-                            if k == 2:
+                            if k == 4:
+                                chance.remove(k)
+                    elif len(five) == 0:
+                        for k in chance:
+                            if k == 5:
+                                chance.remove(k)
+                    elif len(sixPlus) == 0:
+                        for k in chance:
+                            if k == 6:
                                 chance.remove(k)
                     draw = chance[random.randint(0, len(chance)-1)]
 
@@ -141,13 +188,42 @@ def guessfunc():
                     rPlace.append(chosen)
                     trinary -= 1
                     tempTwo.remove(chosen)
-                elif draw == 3 and len(tempThreePlus) != 0:
-                    chosen = tempThreePlus[random.randint(0, len(tempThreePlus)-1)]
+                    
+                    
+                elif draw == 3 and len(tempthree) != 0:
+                    chosen = tempthree[random.randint(0, len(tempthree)-1)]
                     while nums.count(chosen[1]) == 0:
-                        chosen = tempThreePlus[random.randint(0, len(tempThreePlus)-1)]
+                        chosen = tempthree[random.randint(0, len(tempthree)-1)]
                     rPlace.append(chosen)
                     trinary -= 1
-                    tempThreePlus.remove(chosen)
+                    tempthree.remove(chosen)
+                    
+                    
+                elif draw == 4 and len(tempfour) != 0:
+                    chosen = tempfour[random.randint(0, len(tempfour)-1)]
+                    while nums.count(chosen[1]) == 0:
+                        chosen = tempfour[random.randint(0, len(tempfour)-1)]
+                    rPlace.append(chosen)
+                    trinary -= 1
+                    tempfour.remove(chosen)
+                
+                elif draw == 5 and len(tempfive) != 0:
+                    chosen = tempfive[random.randint(0, len(tempfive)-1)]
+                    while nums.count(chosen[1]) == 0:
+                        chosen = tempfive[random.randint(0, len(tempfive)-1)]
+                    rPlace.append(chosen)
+                    trinary -= 1
+                    tempfive.remove(chosen)
+                    
+                elif draw == 6 and len(tempsixPlus) != 0:
+                    chosen = tempsixPlus[random.randint(0, len(tempsixPlus)-1)]
+                    while nums.count(chosen[1]) == 0:
+                        chosen = tempsixPlus[random.randint(0, len(tempsixPlus)-1)]
+                    rPlace.append(chosen)
+                    trinary -= 1
+                    tempsixPlus.remove(chosen)
+                    
+                    
         else:
             newGuess = []
             for v in totalPoss:
@@ -157,7 +233,16 @@ def guessfunc():
             guess.append(newGuess[random.randint(0, len(newGuess)-1)])
 
         #system for filling in guess, first it checks if any rPlace values go in, then it either fills the remaining values with white guesses or randoms
-        while len(guess) != 4:
+        if len(rPlace) > 4:
+            print("ERROR ERROR ERROR!!!!!!")
+            print("EVERYTHING IS WRONG!!!!!")
+            print("rPlace is too big")
+            print("WEEEE WOOO WEEEE WOOO")
+            print("REFER TO GUESSFUNC")
+            print("guess")
+            print(guess)
+            quit()
+        while len(guess) != 4 and len(nums) > 0:
             for n in rPlace:
                 if n[1] == nums[0]:
                     guess.append(n)
@@ -253,6 +338,17 @@ while guessnum != 19:
             colorspossible.append(fguess[n][0])
             n += 1
 
+    #Scoring system
+    if result != "none" and result != "correct":
+        score = 0
+        for i in result:
+            if i == "w":
+                score += 1
+            elif i == "r":
+                score += 3
+        scores.append(score)
+
+
     if result == "none":
 		#add code for no pegs
         for item in fguess:
@@ -280,14 +376,23 @@ while guessnum != 19:
         local.append(i)
 
     for h in rpossible:
-        if local.count(h) == 1 and one.count(h) == 0:
+        if (local.count(h) == 1 or local.count(h) == 2) and one.count(h) == 0:
             one.append(h)
             local.remove(h)
-        elif local.count(h) == 2 and two.count(h) == 0:
+        elif (local.count(h) == 3 or local.count(h) == 4) and two.count(h) == 0:
             two.append(h)
             local.remove(h)
-        elif local.count(h) >= 3 and threePlus.count(h) == 0:
-            threePlus.append(h)
+        elif (local.count(h) == 5 or local.count(h) == 6) and three.count(h) == 0:
+            three.append(h)
+            local.remove(h)
+        elif (local.count(h) == 7 or local.count(h) == 8) and four.count(h) == 0:
+            four.append(h)
+            local.remove(h)
+        elif (local.count(h) == 9 or local.count(h) == 10) and five.count(h) == 0:
+            five.append(h)
+            local.remove(h)
+        elif local.count(h) > 10 and sixPlus.count(h) == 0:
+            sixPlus.append(h)
             local.remove(h)
 
 
