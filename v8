@@ -1,7 +1,4 @@
-#Fix endgame
-#currently it just goes in circles when it should be able to guess the right answer
-
-#Fix the out of range errors in the score eval system
+#work on the new endgame function (and new situations for when its called)
 
 
 
@@ -53,6 +50,8 @@ correct = []
 
 scores = []
 
+endgame = 0
+
 guessnum = 1
 
 nums = ["1", "2", "3", "4"]
@@ -68,6 +67,25 @@ def findPoss():
                 if out.count(g) == 0 and totalPoss.count(g) == 0:
                     totalPoss.append(g)
     return totalPoss
+
+
+
+def startEndgame():
+    fguess = []
+    print("endgame initializing...")
+    
+    highest = []
+    for i in rpossible:
+        highest.append(str(rpossible.count(i)) + i)
+    print("highest")
+    print(highest)
+    highest.sort(reverse=True)
+    while len(fguess)!=4:
+        #add stuff to fguess
+    return fguess
+
+
+
 
 
 #function that uses previous guess knowledge to make an estimate of what the code should be
@@ -135,7 +153,7 @@ def guessfunc():
                     print(attempted[guessnum-3])
                     for i in attempted[guessnum-3]:
                         for j in range(0,2):
-                            if j not in out and j in rpossible:
+                            if out.count(j) == 0 and rpossible.count(j) > 0:
                                 print(j)
                                 rpossible.append(i)
 
@@ -285,9 +303,22 @@ def guessfunc():
 #control flow of the game
 while guessnum != 19:
     totalPoss = findPoss()
-    fguess = guessfunc()
-    while attempted.count(fguess) != 0:
+    if endgame != 1:
         fguess = guessfunc()
+        while attempted.count(fguess) != 0:
+            fguess = guessfunc()
+    else:
+        #returns fguess
+        startEndgame()
+        
+        
+        
+        
+        
+        
+        
+        
+        
     print("guess number " + str(guessnum) + "...")
     print("answer:")
     print("[p1, g2, o3, t4]")
@@ -323,6 +354,22 @@ while guessnum != 19:
 	#adds pegs to rpossible according to how many red pegs it recieves
     elif result.count("r") != 0:
         n = result.count("r")
+        
+        
+        
+        #system that initiates the endgame if three red pegs are given
+        if n == 3:
+            while n != 0:
+                for g in fguess:
+                    if out.count(g) == 0:
+                        rpossible.append(g)
+                n -= 1
+            endgame = 1
+        
+        
+        
+        
+        
         while n != 0:
             for g in fguess:
                 if out.count(g) == 0:
@@ -411,10 +458,8 @@ while guessnum != 19:
             local.remove(h)
 
 
-	#checks for duplicates	in colorspossible
-    for item in colorspossible:
-        if colorspossible.count(item[0]) > 1:
-            colorspossible.remove(item)
+
+
 
 
 
@@ -426,15 +471,26 @@ while guessnum != 19:
     print("out:")
     print(out)
 
-    nums = ["1", "2", "3", "4"]
-    finalPoss = []
-    for color in colors:
-        for i in range(0, 6):
-            for j in range(0, 4):
-                g = colors[i] + nums[j]
-                if out.count(g) == 0 and finalPoss.count(g) == 0:
-                    finalPoss.append(g)
+    totalPoss = findPoss()
+    
 	    
     print("total possible:")
-    print(finalPoss)
+    print(totalPoss)
     guessnum += 1
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
