@@ -1,4 +1,4 @@
-🎮 Mastermind Clone
+🎮 Mastermind
 
 Welcome to Mastermind, a recreation of the classic code-breaking game! This version is built in C# using Photon for multiplayer functionality.
 
@@ -15,7 +15,7 @@ Feedback is provided after each guess to help narrow down the possibilities. Thi
 📂 What's Included
 This repository includes:
 
-📦 MastermindClone.zip
+📦 MastermindGameSave.zip
 
 The game executable.
 All necessary assets and resources to run the game.
