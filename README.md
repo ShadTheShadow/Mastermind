@@ -1,11 +1,15 @@
 🎮 Mastermind Clone
+
 Welcome to Mastermind, a recreation of the classic code-breaking game! This version is built in C# using Photon for multiplayer functionality.
 
 📖 About the Game
+
 Mastermind is a two-player game where:
 
 One player creates a secret code.
+
 The other player guesses the code within a limited number of attempts.
+
 Feedback is provided after each guess to help narrow down the possibilities. This digital version supports online multiplayer, so you can challenge your friends!
 
 📂 What's Included
